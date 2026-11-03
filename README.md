@@ -2,13 +2,6 @@
 
 **Simulación y Monitoreo de Variables Cardiovasculares y Hemodinámicas**
 
-Ingeniería Biomédica · Instrumentación Biomédica y Biosensores
-
-
-
-
-Informe elaborado a partir de la guía de laboratorio y diez videos suministrados. Las mediciones se interpretan como capturas puntuales, no como registros continuos certificados.
-
 1. Resumen
 
 Se evaluó funcionalmente un monitor multiparamétrico Mindray uMEC 100 mediante un simulador Pronk OxSim OX-1 conectado al sensor de pulsioximetría. Se revisaron escenarios de bradicardia, hipoxemia, saturación alta/baja perfusión y taquicardia. Los videos muestran, entre otras lecturas, 40 bpm con 95 % de SpO₂, 80 bpm con 85 %, 80 bpm con 100 % y 140 bpm con 99 %. Los resultados experimentales suministrados incluyen tiempos de activación de alarmas y mediciones comparativas entre simulador y monitor.
@@ -202,38 +195,19 @@ Para cumplir la guía, crear el repositorio desde la cuenta de un integrante, in
 
 [1] Universidad Militar Nueva Granada. Guía de preparación, práctica de laboratorio: Simulación y Monitoreo de Variables Cardiovasculares y Hemodinámicas, revisión 3, 2025.
 
-[2] Diez videos de la práctica, archivos WhatsApp Video 2026-10-29, suministrados por el grupo.
+[2] ISO 80601-2-61, Medical electrical equipment — Particular requirements for basic safety and essential performance of pulse oximeter equipment (referencia normativa general; verificar edición vigente).
 
-[3] ISO 80601-2-61, Medical electrical equipment — Particular requirements for basic safety and essential performance of pulse oximeter equipment (referencia normativa general; verificar edición vigente).
+[3] Manual de operación y especificaciones Mindray uMEC 100, pendiente de adjuntar/validar edición y configuración de sensor.
 
-[4] Manual de operación y especificaciones Mindray uMEC 100, pendiente de adjuntar/validar edición y configuración de sensor.
-
-[5] Manual/ficha técnica Pronk OxSim OX-1, pendiente de adjuntar/validar edición.
+[4] Manual/ficha técnica Pronk OxSim OX-1, pendiente de adjuntar/validar edición.
 
 ## Anexo: evidencias visuales
 
-Fotogramas seleccionados de los videos suministrados (no equivalen a una serie de medición continua).
-
 ![Fotograma del video 01](evidencias/video_01_medio.jpg)
-
-*Fotograma del video 01*
 
 ![Fotograma del video 03](evidencias/video_03_medio.jpg)
 
-*Fotograma del video 03*
-
 ![Fotograma del video 06](evidencias/video_06_medio.jpg)
-
-*Fotograma del video 06*
 
 ![Fotograma del video 10](evidencias/video_10_medio.jpg)
 
-*Fotograma del video 10*
-
-## Integrantes
-
-Completar nombres, grupo, fecha y usuarios de GitHub. Cada integrante debe ser invitado como colaborador del repositorio.
-
-## Cómo publicar
-
-Crear un repositorio nuevo en GitHub, subir el contenido de esta carpeta a la rama principal y verificar que `README.md` muestre las tablas y ecuaciones centradas.
