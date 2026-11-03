@@ -1,0 +1,9 @@
+﻿Escenario,Variable,Simulado,Monitor,Error absoluto,Error porcentual
+Bradicardia,SpO2 (%),95,96,1,"1,05 %"
+Bradicardia,FP (bpm),40,40,0,"0,00 %"
+Hipoxia,SpO2 (%),85,85,0,"0,00 %"
+Hipoxia,FP (bpm),80,80,0,"0,00 %"
+Baja perfusión,SpO2 (%),99,100,1,"1,01 %"
+Baja perfusión,FP (bpm),80,80,0,"0,00 %"
+Taquicardia,SpO2 (%),98,99,1,"1,02 %"
+Taquicardia,FP (bpm),140,140,0,"0,00 %"

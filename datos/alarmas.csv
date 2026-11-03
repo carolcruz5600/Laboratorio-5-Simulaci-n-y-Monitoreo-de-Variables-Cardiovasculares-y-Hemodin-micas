@@ -1,0 +1,5 @@
+﻿Escenario,SpO2 baja (%),SpO2 alta (%),FP baja (bpm),FP alta (bpm),FP simulada (bpm),SpO2 simulada (%),Alarma a 5 s,Tiempo activacion (s)
+Bradicardia,90,100,50,110,40,95,Sí,12
+Hipoxia,90,100,50,110,80,85,No,8
+Baja perfusión,90,97,50,110,80,99,No,12
+Taquicardia,90,97,50,110,140,98,Sí,10
