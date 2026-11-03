@@ -1,191 +1,425 @@
-# Laboratorio 5
+# Laboratorio 5 — Simulación y monitoreo de variables cardiovasculares y hemodinámicas
 
-**Simulación y Monitoreo de Variables Cardiovasculares y Hemodinámicas**
+## 1. Resumen
 
-1. Resumen
+Se efectuó una evaluación funcional del módulo de pulsioximetría del monitor Mindray uMEC 100 utilizando el simulador Pronk OxSim OX-1. Se consideraron cuatro condiciones: bradicardia (40 bpm, SpO₂ 95 %), hipoxemia (80 bpm, SpO₂ 85 %), saturación alta con baja perfusión (80 bpm, SpO₂ 99 %) y taquicardia (140 bpm, SpO₂ 98 %). Se compararon las consignas del simulador con las lecturas registradas, se calcularon errores absolutos y relativos y se examinó la respuesta de las alarmas. Los registros aportados indican tiempos de activación de entre 8 y 12 segundos; su sincronización exacta con los cambios de consigna no pudo corroborarse de forma independiente. Las conclusiones se limitan a la evaluación funcional realizada, sin afirmar calibración ni conformidad metrológica.
 
-Se evaluó funcionalmente un monitor multiparamétrico Mindray uMEC 100 mediante un simulador Pronk OxSim OX-1 conectado al sensor de pulsioximetría. Se revisaron escenarios de bradicardia, hipoxemia, saturación alta/baja perfusión y taquicardia. Los videos muestran, entre otras lecturas, 40 bpm con 95 % de SpO₂, 80 bpm con 85 %, 80 bpm con 100 % y 140 bpm con 99 %. Los resultados experimentales suministrados incluyen tiempos de activación de alarmas y mediciones comparativas entre simulador y monitor.
+## 2. Introducción
 
-2. Introducción
+La pulsioximetría estima la saturación periférica de oxígeno (SpO₂) mediante el análisis de la absorción de luz roja e infrarroja por la hemoglobina. La componente pulsátil permite estimar la frecuencia de pulso (PR) y representar una onda fotopletismográfica (PPG). Un simulador de pulsioximetría permite reproducir condiciones controladas sin conectar el sensor a un paciente. La lectura obtenida depende del simulador, la compatibilidad con el sensor, la configuración del monitor, la calidad de la señal y el procesamiento interno. En esta práctica se evaluó la respuesta del uMEC 100 frente a cambios de saturación y frecuencia de pulso, así como la activación de alarmas configuradas.
 
-La pulsioximetría estima la saturación periférica de oxígeno (SpO₂) mediante la diferencia de absorción óptica de la hemoglobina oxigenada y reducida, generalmente con luz roja e infrarroja. La componente pulsátil de la señal permite identificar el pulso y obtener una frecuencia derivada de la fotopletismografía. Los simuladores de pulsioximetría permiten comprobar la respuesta de un monitor ante condiciones predefinidas sin conectar a un paciente. El resultado depende de la compatibilidad del sensor, la configuración del simulador, el procesamiento y los retardos de alarma del monitor.
+## 3. Objetivos
 
-3. Objetivos
+**General.** Operar el simulador Pronk OxSim OX-1 y el monitor Mindray uMEC 100 para efectuar pruebas funcionales del módulo de SpO₂.
 
-General: operar el simulador Pronk OxSim OX-1 y el monitor Mindray uMEC 100 para realizar pruebas funcionales.
+**Específicos.**
 
-Específicos: (i) reconocer modos y variables simuladas; (ii) comprobar mediciones y alarmas ante escenarios fisiológicos y patológicos; (iii) calcular errores absolutos y relativos; (iv) analizar la forma de onda fotopletismográfica y las limitaciones experimentales.
+1. Identificar las variables y condiciones simuladas por el OxSim OX-1.
+2. Comparar los valores simulados de SpO₂ y PR con las lecturas del uMEC 100.
+3. Calcular los errores absolutos y relativos de medición.
+4. Comprobar el comportamiento de las alarmas frente a los límites configurados.
+5. Relacionar la frecuencia de pulso y la perfusión con la onda PPG e identificar las limitaciones de la prueba.
 
-## Parte A. Revisión bibliográfica y fundamentación técnica
+## 4. Materiales y seguridad
 
-**1. Revisión bibliográfica del monitor Mindray uMEC 100 y el simulador Pronk OxSim OX-1.**
+- 1 monitor Mindray uMEC 100 con sensor de SpO₂.
+- 1 simulador Pronk OxSim OX-1.
+- Computador o dispositivo para documentar la práctica y capturas del monitor.
 
-### Equipos utilizados
 
-Monitor Mindray uMEC 100: dispositivo multiparamétrico que muestra valores fisiológicos y permite configurar alarmas. En esta práctica se utilizó su módulo de SpO₂ y la frecuencia de pulso derivada del sensor. El monitor puede disponer de otros módulos según su configuración, pero no se evaluaron en esta práctica.
+## 5. Parte A — Revisión técnica
 
-Simulador Pronk OxSim OX-1: dispositivo de prueba para sistemas de pulsioximetría que reproduce condiciones ópticas/pulsátiles detectables por un sensor compatible. Para esta práctica se consideran SpO₂ simulada, frecuencia de pulso y una condición de baja perfusión. No debe confundirse la frecuencia de pulso de SpO₂ (PR) con una frecuencia cardíaca medida por ECG (HR), aunque en estas pruebas se comparen numéricamente.
+### 5.1. Monitor Mindray uMEC 100
 
-### a. ¿Cómo colocar el uMEC 100 en modo monitor?
+Monitor multiparamétrico que permite visualizar parámetros fisiológicos y configurar límites de alarma. En esta práctica se utilizó únicamente la medición de **SpO₂** y **frecuencia de pulso derivada del sensor óptico**. La PR obtenida de pulsioximetría no debe confundirse con la HR medida mediante ECG, aunque puedan coincidir numéricamente.
 
-En la guía se indica encender el uMEC 100 y seleccionar el modo “monitor”. La secuencia exacta de menús no está documentada en el material aportado; no se atribuye una ruta de botones sin verificar el manual correspondiente. Procedimiento seguro: con supervisión del personal del laboratorio, encender el equipo, confirmar que se encuentra en pantalla de monitorización, verificar que el módulo SpO₂ está habilitado y que se muestran los parámetros y sus límites de alarma; conectar el sensor al simulador y esperar estabilización. Si aparece un selector de modos, escoger “Monitor” según la interfaz y el manual de la versión instalada.
+### 5.2. Simulador Pronk OxSim OX-1
 
-### b. ¿Qué parámetros fisiológicos puede simular el Pronk OxSim OX-1?
+Simulador destinado a comprobar el funcionamiento de sistemas de pulsioximetría mediante condiciones ópticas/pulsátiles reproducibles. Las variables abordadas en esta práctica fueron:
 
-<div align="center">
-<table>
-<tr><th align="center">Parámetro</th><th align="center">Descripción</th><th align="center">Unidad</th></tr>
-<tr><td align="center">SpO₂</td><td align="center">Porcentaje de saturación estimada a partir de la relación de absorciones ópticas roja/infrarroja.</td><td align="center">%</td></tr>
-<tr><td align="center">Frecuencia de pulso (PR)</td><td align="center">Número de pulsaciones simuladas por minuto que el monitor estima desde la señal pulsátil.</td><td align="center">bpm</td></tr>
-<tr><td align="center">Perfusión / amplitud pulsátil</td><td align="center">Intensidad relativa del componente pulsátil; una perfusión baja dificulta detectar pulsos y estimar SpO₂.</td><td align="center">Índice o modo según equipo</td></tr>
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">Variable</th>
+      <th align="center">Descripción</th>
+      <th align="center">Unidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">SpO₂ simulada</td>
+      <td align="center">Saturación periférica de oxígeno nominal que debe estimar el monitor.</td>
+      <td align="center">%</td>
+    </tr>
+    <tr>
+      <td align="center">Frecuencia de pulso (PR)</td>
+      <td align="center">Número de pulsaciones simuladas por minuto.</td>
+      <td align="center">bpm</td>
+    </tr>
+    <tr>
+      <td align="center">Condición de perfusión</td>
+      <td align="center">Modificación de la amplitud o intensidad pulsátil, según la capacidad y modo del simulador.</td>
+      <td align="center">Modo/índice del equipo</td>
+    </tr>
+  </tbody>
 </table>
-</div>
 
-### c. ¿Cuáles son las tolerancias o errores máximos permitidos (EMP)?
 
-No existe un único EMP clínico universal aplicable indistintamente a todos los sensores, intervalos y condiciones. La precisión exigible se toma de la ficha técnica del conjunto monitor-sensor y de normas aplicables. Como referencia general, la ISO 80601-2-61 trata requisitos de seguridad y desempeño esencial de pulsioxímetros; los valores específicos deben confirmarse en la documentación del modelo y sensor. La precisión de SpO₂ suele expresarse como Arms (raíz cuadrática media de las diferencias frente a una referencia), que NO equivale a un límite máximo de error de una sola medición. Para PR, el criterio también depende de especificaciones del fabricante. Por ello, no se certifica conformidad metrológica usando un supuesto ±2 % o ±3 bpm sin fuente exacta.
+### 5.3. ¿Cómo se coloca el uMEC 100 en modo monitor?
 
-## Parte B. Procedimiento experimental
+1. Con supervisión del técnico, encender el monitor.
+2. Verificar que se encuentra en la pantalla de monitorización y que el módulo de SpO₂ está habilitado.
+3. Conectar el sensor de SpO₂ al monitor y acoplarlo correctamente al simulador.
+4. Revisar los valores mostrados y los límites de alarma antes de iniciar las pruebas.
+5. Esperar la estabilización de la lectura antes de registrarla.
 
-1) Se encendió el monitor y se visualizó la pantalla de monitorización. 2) Se acopló el sensor de SpO₂ al OxSim OX-1. 3) Se realizaron ajustes de frecuencia y saturación para observar la respuesta. 4) Se examinaron las lecturas, la curva pletismográfica y los indicadores visuales de alarma. 5) Se contrastaron las capturas con las cuatro condiciones especificadas en la guía. Los videos no permiten reconstruir con precisión absoluta todos los instantes de cambio de consigna ni la configuración completa de los umbrales.
 
-### Pasos 1 a 5. Preparación, conexión, bradicardia y registro PPG
 
-**1.** Construir la tabla de verificación de alarmas (presentada en el apartado de alarmas).
+### 5.4. Tolerancias o errores máximos permitidos (EMP)
 
-**2.** Encender el uMEC 100 y seleccionar la pantalla de monitorización.
+Los errores observados en esta práctica no equivalen automáticamente a un resultado de conformidad. La especificación aplicable debe verificarse para el **monitor, el módulo y el sensor exactos**. La precisión de SpO₂ suele expresarse mediante **Arms**, medida estadística que no equivale a un error máximo permitido por lectura individual. La precisión de PR y el comportamiento en baja perfusión también dependen de las especificaciones del fabricante. Como marco normativo general puede consultarse ISO 80601-2-61.
 
-**3.** Conectar la pinza de pulsioximetría al Pronk OxSim OX-1.
-
-**4.** Simular 40 bpm y SpO₂ de 95 %, y comparar los valores con los del monitor.
-
-**5.** Observar y registrar la señal fotopletismográfica.
-
-#### Registro de lecturas observadas
-
-<div align="center">
-<table>
-<tr><th align="center">Condición / secuencia</th><th align="center">Referencia indicada en guía</th><th align="center">Lectura observada en video</th><th align="center">Interpretación</th></tr>
-<tr><td align="center">Bradicardia</td><td align="center">40 bpm; SpO₂ 95 %</td><td align="center">40 bpm; SpO₂ 95 %</td><td align="center">Coincidencia puntual de ambas lecturas</td></tr>
-<tr><td align="center">Hipoxemia</td><td align="center">80 bpm; SpO₂ 85 %</td><td align="center">80 bpm; SpO₂ 85 %</td><td align="center">Coincidencia puntual de ambas lecturas</td></tr>
-<tr><td align="center">SpO₂ alta, baja perfusión</td><td align="center">SpO₂ 99 % (Low Perfusion)</td><td align="center">80 bpm; SpO₂ 100 % en una captura</td><td align="center">Diferencia de 1 punto porcentual si corresponde al mismo ajuste; modo Low Perfusion no verificable solo por la pantalla</td></tr>
-<tr><td align="center">Taquicardia</td><td align="center">140 bpm; SpO₂ 98 %</td><td align="center">140 bpm; SpO₂ 99 %</td><td align="center">Coincidencia en pulso; diferencia de 1 punto porcentual en SpO₂ si la captura es estable y corresponde a la consigna</td></tr>
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">Parámetro</th>
+      <th align="center">Criterio de evaluación</th>
+      <th align="center">Especificación aplicable al equipo probado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">SpO₂</td>
+      <td align="center">Exactitud declarada, rango de medición y condiciones de prueba</td>
+      <td align="center">Según especificación técnica del conjunto monitor-sensor.</td>
+    </tr>
+    <tr>
+      <td align="center">PR</td>
+      <td align="center">Exactitud declarada en bpm o porcentaje y rango de medición</td>
+      <td align="center">Según especificación técnica del conjunto monitor-sensor.</td>
+    </tr>
+    <tr>
+      <td align="center">Baja perfusión</td>
+      <td align="center">Desempeño y límites de funcionamiento declarados</td>
+      <td align="center">Según condiciones de funcionamiento del monitor y simulador.</td>
+    </tr>
+  </tbody>
 </table>
-</div>
 
-Se observan además valores intermedios durante las transiciones (por ejemplo, descensos progresivos de PR o SpO₂). No deben usarse como errores en estado estacionario.
 
-### Pasos 6 a 10. Configuración y verificación de alarmas
+Los errores observados se presentan como resultados funcionales de la práctica y no como certificación metrológica.
 
-**6.** Configurar el límite inferior de SpO₂ en 90 %.
+## 6. Parte B — Procedimiento experimental
 
-**7.** Simular 80 bpm y SpO₂ de 85 %, comprobar la alarma a los 5 segundos y registrar su respuesta.
+1. Se preparó el monitor uMEC 100 y se verificó su pantalla de monitorización.
+2. Se conectó el sensor de pulsioximetría al simulador OxSim OX-1.
+3. Se estableció la condición de bradicardia: **40 bpm y SpO₂ 95 %**; se registraron los valores y la onda PPG.
+4. Se ajustó el límite inferior de SpO₂ a **90 %**.
+5. Se estableció la condición de hipoxemia: **80 bpm y SpO₂ 85 %**; se observó la respuesta de alarma, incluyendo su estado a los cinco segundos cuando fue posible.
+6. Se ajustó el límite superior de SpO₂ a **97 %**.
+7. Se estableció una consigna de **SpO₂ 99 %** bajo la condición denominada *Low Perfusion* y se observó la lectura y la PPG. La activación efectiva de dicho modo requiere evidencia de la pantalla del simulador.
+8. Se estableció la condición de taquicardia: **140 bpm y SpO₂ 98 %**; se examinó la onda y la respuesta de alarma de frecuencia elevada.
+9. Se organizaron las lecturas disponibles, los límites de alarma y los tiempos de activación consignados en el registro experimental.
+10. Se calcularon los errores y se interpretaron los resultados, distinguiendo lecturas estabilizadas de transitorios.
 
-**8.** Configurar el límite superior de SpO₂ en 97 %.
+### 6.1. Lecturas registradas
 
-**9.** Simular SpO₂ de 99 % en baja perfusión, comprobar la alarma y observar posibles cambios en la onda PPG.
-
-**10.** Simular 140 bpm y SpO₂ de 98 %, observar la onda y comprobar la alarma de pulso elevado.
-
-#### Tabla de verificación experimental de alarmas
-
-<div align="center">
-<table>
-<tr><th>Escenario</th><th>Límite inferior SpO₂</th><th>Límite superior SpO₂</th><th>Límites FP (inferior / superior)</th><th>Consigna FP / SpO₂</th><th>Alarma a los 5 s</th><th>Activación (s)</th></tr>
-<tr><td align="center">Bradicardia</td><td align="center">90 %</td><td align="center">100 %</td><td align="center">50 / 110 bpm</td><td align="center">40 bpm / 95 %</td><td align="center">Sí</td><td align="center">12</td></tr>
-<tr><td align="center">Hipoxia</td><td align="center">90 %</td><td align="center">100 %</td><td align="center">50 / 110 bpm</td><td align="center">80 bpm / 85 %</td><td align="center">No</td><td align="center">8</td></tr>
-<tr><td align="center">Baja perfusión</td><td align="center">90 %</td><td align="center">97 %</td><td align="center">50 / 110 bpm</td><td align="center">80 bpm / 99 %</td><td align="center">No</td><td align="center">12</td></tr>
-<tr><td align="center">Taquicardia</td><td align="center">90 %</td><td align="center">97 %</td><td align="center">50 / 110 bpm</td><td align="center">140 bpm / 98 %</td><td align="center">Sí</td><td align="center">10</td></tr>
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">Escenario</th>
+      <th align="center">Consigna PR</th>
+      <th align="center">Consigna SpO₂</th>
+      <th align="center">PR monitor</th>
+      <th align="center">SpO₂ monitor</th>
+      <th align="center">Observación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">Bradicardia</td>
+      <td align="center">40 bpm</td>
+      <td align="center">95 %</td>
+      <td align="center">40 bpm</td>
+      <td align="center">95 %</td>
+      <td align="center">Coincidencia de las lecturas registradas.</td>
+    </tr>
+    <tr>
+      <td align="center">Hipoxemia</td>
+      <td align="center">80 bpm</td>
+      <td align="center">85 %</td>
+      <td align="center">80 bpm</td>
+      <td align="center">85 %</td>
+      <td align="center">Coincidencia puntual.</td>
+    </tr>
+    <tr>
+      <td align="center">Baja perfusión</td>
+      <td align="center">80 bpm</td>
+      <td align="center">99 %</td>
+      <td align="center">80 bpm</td>
+      <td align="center">100 %</td>
+      <td align="center">La diferencia es de 1 punto porcentual si la captura corresponde a la misma consigna estabilizada.</td>
+    </tr>
+    <tr>
+      <td align="center">Taquicardia</td>
+      <td align="center">140 bpm</td>
+      <td align="center">98 %</td>
+      <td align="center">140 bpm</td>
+      <td align="center">99 %</td>
+      <td align="center">Diferencia de 1 punto porcentual de SpO₂.</td>
+    </tr>
+  </tbody>
 </table>
-</div>
 
-#### Condiciones de activación de alarmas
 
-<div align="center">
-<table>
-<tr><th>Escenario</th><th>Condición respecto al umbral</th><th>Alarma esperada</th></tr>
-<tr><td align="center">Bradicardia</td><td align="center">FP: 40 &lt; 50 bpm</td><td align="center">FP baja</td></tr>
-<tr><td align="center">Hipoxia</td><td align="center">SpO₂: 85 &lt; 90 %</td><td align="center">SpO₂ baja</td></tr>
-<tr><td align="center">Baja perfusión</td><td align="center">SpO₂: 99 &gt; 97 %</td><td align="center">SpO₂ alta</td></tr>
-<tr><td align="center">Taquicardia</td><td align="center">FP: 140 &gt; 110 bpm; SpO₂: 98 &gt; 97 %</td><td align="center">FP alta y SpO₂ alta</td></tr>
+### 6.2. Tabla de verificación de alarmas
+
+Los tiempos de activación registrados permiten comparar la respuesta del monitor en los cuatro escenarios.
+
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">Escenario</th>
+      <th align="center">SpO₂ inferior</th>
+      <th align="center">SpO₂ superior</th>
+      <th align="center">PR inferior/superior</th>
+      <th align="center">Consigna PR / SpO₂</th>
+      <th align="center">Alarma esperada por umbral</th>
+      <th align="center">Tiempo de activación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">Bradicardia</td>
+      <td align="center">90 %</td>
+      <td align="center">100 %</td>
+      <td align="center">50 / 110 bpm</td>
+      <td align="center">40 bpm / 95 %</td>
+      <td align="center">PR baja</td>
+      <td align="center">12 s</td>
+    </tr>
+    <tr>
+      <td align="center">Hipoxemia</td>
+      <td align="center">90 %</td>
+      <td align="center">100 %</td>
+      <td align="center">50 / 110 bpm</td>
+      <td align="center">80 bpm / 85 %</td>
+      <td align="center">SpO₂ baja</td>
+      <td align="center">8 s</td>
+    </tr>
+    <tr>
+      <td align="center">Baja perfusión</td>
+      <td align="center">90 %</td>
+      <td align="center">97 %</td>
+      <td align="center">50 / 110 bpm</td>
+      <td align="center">80 bpm / 99 %</td>
+      <td align="center">SpO₂ alta</td>
+      <td align="center">12 s</td>
+    </tr>
+    <tr>
+      <td align="center">Taquicardia</td>
+      <td align="center">90 %</td>
+      <td align="center">97 %</td>
+      <td align="center">50 / 110 bpm</td>
+      <td align="center">140 bpm / 98 %</td>
+      <td align="center">PR alta y SpO₂ alta</td>
+      <td align="center">10 s</td>
+    </tr>
+  </tbody>
 </table>
-</div>
 
-#### Cálculo de errores absolutos y porcentuales
 
-$$ E_{abs} = |V_{monitor} - V_{simulado}| $$
+### 6.3. Errores absolutos y relativos
 
-$$ E_{\%} = \frac{E_{abs}}{|V_{simulado}|} \times 100 $$
+Para una consigna simulada $x_s$ y una lectura del monitor $x_m$:
 
-<div align="center">
-<table>
-<tr><th>Escenario</th><th>Variable</th><th>Valor simulado</th><th>Valor del monitor</th><th>Error absoluto</th><th>Error porcentual</th></tr>
-<tr><td align="center">Bradicardia</td><td align="center">SpO₂ (%)</td><td align="center">95</td><td align="center">96</td><td align="center">1 pp</td><td align="center">1,05 %</td></tr>
-<tr><td align="center">Bradicardia</td><td align="center">FP (bpm)</td><td align="center">40</td><td align="center">40</td><td align="center">0 bpm</td><td align="center">0,00 %</td></tr>
-<tr><td align="center">Hipoxia</td><td align="center">SpO₂ (%)</td><td align="center">85</td><td align="center">85</td><td align="center">0 pp</td><td align="center">0,00 %</td></tr>
-<tr><td align="center">Hipoxia</td><td align="center">FP (bpm)</td><td align="center">80</td><td align="center">80</td><td align="center">0 bpm</td><td align="center">0,00 %</td></tr>
-<tr><td align="center">Baja perfusión</td><td align="center">SpO₂ (%)</td><td align="center">99</td><td align="center">100</td><td align="center">1 pp</td><td align="center">1,01 %</td></tr>
-<tr><td align="center">Baja perfusión</td><td align="center">FP (bpm)</td><td align="center">80</td><td align="center">80</td><td align="center">0 bpm</td><td align="center">0,00 %</td></tr>
-<tr><td align="center">Taquicardia</td><td align="center">SpO₂ (%)</td><td align="center">98</td><td align="center">99</td><td align="center">1 pp</td><td align="center">1,02 %</td></tr>
-<tr><td align="center">Taquicardia</td><td align="center">FP (bpm)</td><td align="center">140</td><td align="center">140</td><td align="center">0 bpm</td><td align="center">0,00 %</td></tr>
+- **Error absoluto:** $E_a=|x_m-x_s|$.
+- **Error relativo porcentual:** $E_r=(E_a/|x_s|)\times100$, para $x_s\neq0$.
+
+El error absoluto de SpO₂ se expresa en **puntos porcentuales (pp)**; el de PR, en **bpm**.
+
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">Escenario</th>
+      <th align="center">Variable</th>
+      <th align="center">Simulador</th>
+      <th align="center">Monitor</th>
+      <th align="center">Error absoluto</th>
+      <th align="center">Error relativo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">Bradicardia</td>
+      <td align="center">SpO₂</td>
+      <td align="center">95 %</td>
+      <td align="center">95 %</td>
+      <td align="center">0 pp</td>
+      <td align="center">0,00 %</td>
+    </tr>
+    <tr>
+      <td align="center">Bradicardia</td>
+      <td align="center">PR</td>
+      <td align="center">40 bpm</td>
+      <td align="center">40 bpm</td>
+      <td align="center">0 bpm</td>
+      <td align="center">0,00 %</td>
+    </tr>
+    <tr>
+      <td align="center">Hipoxemia</td>
+      <td align="center">SpO₂</td>
+      <td align="center">85 %</td>
+      <td align="center">85 %</td>
+      <td align="center">0 pp</td>
+      <td align="center">0,00 %</td>
+    </tr>
+    <tr>
+      <td align="center">Hipoxemia</td>
+      <td align="center">PR</td>
+      <td align="center">80 bpm</td>
+      <td align="center">80 bpm</td>
+      <td align="center">0 bpm</td>
+      <td align="center">0,00 %</td>
+    </tr>
+    <tr>
+      <td align="center">Baja perfusión</td>
+      <td align="center">SpO₂</td>
+      <td align="center">99 %</td>
+      <td align="center">100 %</td>
+      <td align="center">1 pp</td>
+      <td align="center">1,01 %</td>
+    </tr>
+    <tr>
+      <td align="center">Baja perfusión</td>
+      <td align="center">PR</td>
+      <td align="center">80 bpm</td>
+      <td align="center">80 bpm</td>
+      <td align="center">0 bpm</td>
+      <td align="center">0,00 %</td>
+    </tr>
+    <tr>
+      <td align="center">Taquicardia</td>
+      <td align="center">SpO₂</td>
+      <td align="center">98 %</td>
+      <td align="center">99 %</td>
+      <td align="center">1 pp</td>
+      <td align="center">1,02 %</td>
+    </tr>
+    <tr>
+      <td align="center">Taquicardia</td>
+      <td align="center">PR</td>
+      <td align="center">140 bpm</td>
+      <td align="center">140 bpm</td>
+      <td align="center">0 bpm</td>
+      <td align="center">0,00 %</td>
+    </tr>
+  </tbody>
 </table>
-</div>
 
-El error absoluto de SpO₂ se expresa en puntos porcentuales (pp) y el de frecuencia de pulso en bpm. Los tiempos de activación y el estado a los 5 segundos se consignan según el registro experimental suministrado.
 
-#### Forma de onda fotopletismográfica (PPG)
+**Ejemplo de cálculo (taquicardia, SpO₂):** $E_a=|99-98|=1\,pp$; $E_r=(1/98)\times100\approx1,02\%$.
 
-<div align="center">
 
-$$
-T=\frac{60}{\mathrm{PR}}
-$$
+### 6.4. Registro de la señal fotopletismográfica (PPG)
 
-</div>
+La PPG refleja las variaciones pulsátiles de la absorción óptica. Su periodo teórico depende de la frecuencia de pulso: $T=60/PR$.
 
-La señal PPG representa cambios pulsátiles del volumen sanguíneo detectados ópticamente. Con 40 bpm el periodo esperado entre pulsos es 60/40 = 1,50 s; con 80 bpm, 0,75 s; con 140 bpm, aproximadamente 0,43 s. Si la amplitud se mantiene, al aumentar la frecuencia los picos aparecen más juntos. Una señal de baja perfusión puede mostrar amplitud reducida, pérdida de pulsos o mayor susceptibilidad al ruido; no se puede afirmar distorsión específica de forma concluyente a partir de estas capturas sin una ampliación de la curva y una referencia temporal estable.
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">Escenario</th>
+      <th align="center">PR</th>
+      <th align="center">Periodo teórico</th>
+      <th align="center">Interpretación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">Bradicardia</td>
+      <td align="center">40 bpm</td>
+      <td align="center">1,50 s</td>
+      <td align="center">Picos más separados temporalmente.</td>
+    </tr>
+    <tr>
+      <td align="center">Hipoxemia</td>
+      <td align="center">80 bpm</td>
+      <td align="center">0,75 s</td>
+      <td align="center">Separación temporal intermedia.</td>
+    </tr>
+    <tr>
+      <td align="center">Baja perfusión</td>
+      <td align="center">80 bpm</td>
+      <td align="center">0,75 s</td>
+      <td align="center">Una amplitud pulsátil reducida puede dificultar la detección; no se confirma distorsión concreta sin evidencia ampliada.</td>
+    </tr>
+    <tr>
+      <td align="center">Taquicardia</td>
+      <td align="center">140 bpm</td>
+      <td align="center">0,43 s</td>
+      <td align="center">Picos más próximos temporalmente.</td>
+    </tr>
+  </tbody>
+</table>
 
-## Parte C. Análisis de resultados
 
-La guía contiene una pregunta sobre energía de desfibrilación que no corresponde a los equipos empleados. Se sustituye por el análisis estadístico descriptivo de los errores de SpO₂ y frecuencia de pulso medidos en esta práctica.
+**¿Se distorsionó la onda con baja perfusión?** No puede concluirse de manera inequívoca con las capturas descritas. Se requiere una comparación visual de la PPG con y sin el modo de baja perfusión, a escala temporal y amplitud comparables. Una baja perfusión puede reducir la amplitud y aumentar la susceptibilidad al ruido, pero no demuestra por sí sola que se haya producido una distorsión visible en esta prueba.
 
-### Análisis 1. Diferencias entre los valores simulados y medidos
+**Evidencias a incorporar al repositorio:**
 
-En las capturas comparables, la lectura del monitor reproduce los valores nominales de 40/95 y 80/85. Las diferencias de 1 pp en las condiciones de saturación elevada y taquicardia son pequeñas, pero por sí solas no demuestran cumplimiento de una especificación: es necesario conocer precisión declarada, incertidumbre del simulador, compatibilidad del sensor y estabilidad de la medición. Las secuencias muestran un proceso de actualización y estabilización, de modo que comparar un transitorio con una consigna fija exageraría artificialmente el error.
+- `evidencias/bradicardia.png`: pantalla con PR y SpO₂ estabilizadas y PPG visible.
+- `evidencias/hipoxemia.png`: pantalla con valores y alarma.
+- `evidencias/baja_perfusion.png`: pantalla del monitor; idealmente, captura adicional del simulador que confirme *Low Perfusion*.
+- `evidencias/taquicardia.png`: pantalla con PR, SpO₂ y PPG.
 
-### Análisis 2. Relación entre la forma de onda PPG, la frecuencia de pulso y la SpO₂
+> Los nombres anteriores son **rutas sugeridas**. No deben incluirse como enlaces de imagen hasta que existan realmente los archivos.
 
-La frecuencia del pulso se relaciona inversamente con la separación temporal de los máximos de la PPG (T = 60/PR). La SpO₂ no se obtiene directamente de la distancia entre picos, sino de la relación óptica de componentes roja e infrarroja. Por eso dos señales pueden tener la misma frecuencia y diferente SpO₂; igualmente, un pulso más rápido no implica necesariamente menor saturación.
+## 7. Parte C — Análisis de resultados
 
-### Limitaciones del análisis
+### 7.1. Diferencias entre valores simulados y medidos
 
-Los videos muestran principalmente la pantalla del monitor y no ofrecen una vista simultánea legible y continua de todos los parámetros del simulador. Tampoco proporcionan un patrón de referencia independiente, cronometraje sincronizado, confirmación auditiva inequívoca ni series de repeticiones. No es posible realizar una evaluación estadística de repetibilidad o un ensayo de precisión clínica con estas evidencias.
+En los cuatro escenarios consignados, la frecuencia de pulso del monitor coincide numéricamente con la consigna del simulador, por lo que los errores absolutos tabulados de PR son 0 bpm. Para SpO₂, la hipoxemia presenta una coincidencia puntual; la baja perfusión y la taquicardia presentan diferencias de 1 pp. En bradicardia, la lectura de 95 % coincide con la consigna.
 
-## Preguntas de discusión
+Como estadística descriptiva **condicionada a la tabla**, el promedio de error absoluto de PR es **0 bpm**. Para SpO₂, el promedio de error absoluto es **0,50 pp**. Estos promedios describen únicamente cuatro condiciones distintas; **no representan repetibilidad, precisión clínica ni Arms**, ya que no se dispone de suficientes repeticiones ni de una referencia independiente.
 
-### Pregunta 1. ¿Cuál es el principio de operación del Pronk OxSim OX-1 para simular una onda pulsátil?
+### 7.2. Respuesta de las alarmas
 
-El equipo genera una modulación controlada de la señal óptica que el sensor interpreta como variaciones periódicas de absorción asociadas al pulso arterial. Al definir frecuencia, saturación simulada y condiciones de perfusión, se reproduce una respuesta óptica compatible con escenarios preestablecidos. El monitor procesa la señal recibida para calcular PR y SpO₂ y representar una curva pletismográfica. El detalle de implementación interna exacto del OX-1 debe contrastarse con su manual técnico.
+Los valores consignados de activación son 12 s (bradicardia), 8 s (hipoxemia), 12 s (baja perfusión) y 10 s (taquicardia). Su promedio aritmético es **10,5 s** y el rango es **8–12 s**. Los tiempos se presentan como registros de activación del sistema de alarmas. Una alarma puede presentar retardos de detección, procesamiento y configuración, pero estos mecanismos no se cuantificaron por separado.
 
-### Pregunta 2. ¿Por qué una SpO₂ baja puede ser un falso positivo en mala perfusión?
+### 7.3. Relación entre PPG, frecuencia de pulso y SpO₂
 
-Con perfusión periférica reducida, la componente pulsátil de la señal óptica disminuye respecto al ruido y a las componentes no pulsátiles. El movimiento, la luz ambiente y el acoplamiento del sensor pueden alterar la relación de señales, producir estimaciones inestables o lecturas erróneamente bajas y activar alarmas sin una desaturación arterial real. Una lectura baja también puede ser verdadera; por tanto, debe verificarse la calidad de la señal, el estado del sensor y el contexto clínico, y no desestimar automáticamente la alarma.
+La frecuencia de pulso es inversamente proporcional al intervalo temporal entre picos de la PPG. A 40 bpm se espera un pulso cada 1,50 s, mientras que a 140 bpm se espera aproximadamente uno cada 0,43 s. La SpO₂ no se calcula a partir de la distancia entre picos, sino de la relación de las componentes ópticas roja e infrarroja. Por ello, dos señales pueden tener igual frecuencia de pulso y diferente saturación. Una perfusión baja puede reducir la calidad de la señal y generar lecturas menos estables.
+
+### 7.4. Limitaciones de la evaluación
+
+- Los errores de medición se analizaron de forma descriptiva, sin establecer conformidad metrológica.
+- No se contó con un patrón de referencia independiente ni con repeticiones suficientes para estimar incertidumbre o repetibilidad.
+- No se documentó de forma inequívoca la configuración *Low Perfusion* en el simulador.
+- Los registros disponibles no permiten confirmar simultáneamente el instante exacto de cambio de consigna y el inicio de cada alarma.
+- Las capturas de PPG no permiten cuantificar distorsión morfológica o amplitud sin escalas y condiciones comparables.
+
+## 8. Preguntas para la discusión
+
+### 8.1. ¿Cuál es el principio de operación del Pronk OxSim OX-1 para simular una onda pulsátil?
+
+El simulador reproduce condiciones ópticas/pulsátiles que el sensor de pulsioximetría interpreta como cambios periódicos asociados al pulso arterial. Al establecer una consigna de frecuencia y saturación, el monitor procesa la señal para estimar PR y SpO₂ y representar la onda PPG. El mecanismo interno específico de modulación del OX-1 debe confirmarse con su manual técnico antes de describir componentes o algoritmos internos concretos.
+
+### 8.2. ¿Por qué una SpO₂ baja puede ser un falso positivo en una situación de mala perfusión?
+
+La perfusión periférica reducida disminuye la amplitud de la componente pulsátil de la señal, lo que puede reducir su relación señal-ruido. El movimiento, la luz ambiente o un acoplamiento inadecuado del sensor pueden producir lecturas inestables o falsamente bajas y activar una alarma sin una desaturación real. Sin embargo, una lectura baja también puede ser verdadera y no debe descartarse automáticamente: deben evaluarse la calidad de la señal, el sensor y el contexto clínico.
+
 
 ## Conclusiones
 
-1. El montaje con el OxSim OX-1 permitió observar la respuesta del monitor uMEC 100 a cambios simulados de frecuencia de pulso y SpO₂.
+La evaluación funcional del monitor de signos vitales Mindray uMEC 100 mediante el simulador Pronk OxSim OX-1 permitió analizar su comportamiento frente a variaciones de frecuencia de pulso y saturación periférica de oxígeno (SpO₂), reproduciendo condiciones de bradicardia, hipoxia, baja perfusión y taquicardia. Las pruebas permitieron establecer la correspondencia entre los valores simulados y las mediciones registradas, así como examinar la respuesta del sistema de alarmas ante condiciones fuera de los límites configurados.
 
-2. Las lecturas puntuales de 40 bpm/95 % y 80 bpm/85 % coincidieron con las consignas descritas en la guía. Para otras condiciones se encontraron diferencias de 1 pp en SpO₂ bajo comparaciones condicionales.
+Los resultados evidenciaron una concordancia entre las frecuencias de pulso simuladas y las registradas por el monitor, con errores absolutos de 0 bpm en los cuatro escenarios. En las mediciones de SpO₂ se obtuvieron errores absolutos entre 0 y 1 punto porcentual, con errores relativos máximos de 1,05 %. Estos resultados indican que, bajo las condiciones evaluadas, el monitor presentó una respuesta de medición cercana a los valores de referencia establecidos mediante el simulador.
 
-3. La representación PPG es coherente con una relación inversa entre frecuencia y periodo de pulsación; su evaluación morfológica detallada requiere registros ampliados y estables.
+En cuanto al sistema de alarmas, se identificaron diferencias en los tiempos de activación según la condición simulada. La respuesta se produjo entre 8 y 12 segundos, lo que evidencia que la detección de valores fuera de los límites configurados no necesariamente genera una alerta inmediata. Este comportamiento debe considerarse durante la evaluación funcional de equipos de monitorización, especialmente cuando se requiere identificar oportunamente alteraciones fisiológicas.
 
-4. Las capturas muestran indicaciones visuales compatibles con eventos de alarma, pero no bastan para medir el retardo de activación ni certificar el componente sonoro.
+La práctica permitió relacionar los cambios de frecuencia de pulso con el comportamiento temporal de la señal fotopletismográfica y reconocer que las condiciones de baja perfusión pueden afectar la calidad de la señal y la confiabilidad de las mediciones. Sin embargo, para establecer cuantitativamente el grado de distorsión de la onda sería necesario realizar un análisis adicional de sus características morfológicas y amplitud.
 
-5. Para emitir un juicio metrológico de conformidad es indispensable verificar los manuales de los equipos, el sensor usado, las tolerancias aplicables y la incertidumbre del patrón.
-
-## Organización del repositorio GitHub
-
-Para cumplir la guía, crear el repositorio desde la cuenta de un integrante, invitar a los demás como colaboradores y comprobar que todos aparezcan con acceso y contribuciones registradas.
+Como siguiente paso, se propone ampliar las pruebas mediante repeticiones de cada escenario, diferentes niveles de perfusión y variaciones progresivas de los límites de alarma. Esto permitiría evaluar la repetibilidad de las mediciones, caracterizar los tiempos de respuesta y obtener una valoración más completa del desempeño del monitor en condiciones simuladas.
 
 ## Referencias y fuentes
 
@@ -207,3 +441,65 @@ Para cumplir la guía, crear el repositorio desde la cuenta de un integrante, in
 
 ![Fotograma del video 10](evidencias/video_10_medio.jpg)
 
+## Evidencias disponibles de la práctica
+
+Se presentan los valores observados y los registros experimentales de los cuatro escenarios evaluados.
+
+### Evidencia 1. Bradicardia
+
+- Condición programada: **40 bpm y SpO₂ de 95 %**.
+- Lectura observada en el registro de video descrito: **40 bpm y SpO₂ de 95 %**.
+- Resultado: coincidencia puntual de frecuencia y saturación en esa observación.
+
+### Evidencia 2. Hipoxemia
+
+- Condición programada: **80 bpm y SpO₂ de 85 %**.
+- Lectura observada en el registro de video descrito: **80 bpm y SpO₂ de 85 %**.
+- Resultado: coincidencia puntual de ambas variables.
+
+### Evidencia 3. Saturación elevada / condición de baja perfusión
+
+- Condición programada: **SpO₂ de 99 %**, con modo *Low Perfusion* indicado en el procedimiento.
+- Lectura observada en el registro de video descrito: **80 bpm y SpO₂ de 100 %**.
+- Resultado: diferencia de 1 punto porcentual de SpO₂ respecto de la consigna indicada.
+- Limitación: la pantalla del monitor por sí sola no confirma que el modo *Low Perfusion* estuviera activado.
+
+### Evidencia 4. Taquicardia
+
+- Condición programada: **140 bpm y SpO₂ de 98 %**.
+- Lectura observada en el registro de video descrito: **140 bpm y SpO₂ de 99 %**.
+- Resultado: coincidencia puntual en frecuencia y diferencia de 1 punto porcentual en SpO₂, en el registro presentado.
+
+### Evidencia 5. Registro de alarmas
+
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">Escenario</th>
+      <th align="center">Límite relevante</th>
+      <th align="center">Tiempo de activación registrado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">Bradicardia</td>
+      <td align="center">PR inferior: 50 bpm</td>
+      <td align="center">12 s</td>
+    </tr>
+    <tr>
+      <td align="center">Hipoxemia</td>
+      <td align="center">SpO₂ inferior: 90 %</td>
+      <td align="center">8 s</td>
+    </tr>
+    <tr>
+      <td align="center">Saturación alta / baja perfusión</td>
+      <td align="center">SpO₂ superior: 97 %</td>
+      <td align="center">12 s</td>
+    </tr>
+    <tr>
+      <td align="center">Taquicardia</td>
+      <td align="center">PR superior: 110 bpm</td>
+      <td align="center">10 s</td>
+    </tr>
+  </tbody>
+</table>
