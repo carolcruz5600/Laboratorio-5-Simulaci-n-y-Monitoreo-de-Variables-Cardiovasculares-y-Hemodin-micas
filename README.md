@@ -113,13 +113,9 @@ Se observan además valores intermedios durante las transiciones (por ejemplo, d
 
 #### Cálculo de errores absolutos y porcentuales
 
-$$
-E_{\mathrm{abs}}=\left|V_{\mathrm{monitor}}-V_{\mathrm{simulado}}\right|
-$$
+$$ E_{abs} = |V_{monitor} - V_{simulado}| $$
 
-$$
-E_{\%}=\frac{E_{\mathrm{abs}}}{\left|V_{\mathrm{simulado}}\right|}\times100
-$$
+$$ E_{\%} = \frac{E_{abs}}{|V_{simulado}|} \times 100 $$
 
 <div align="center">
 <table>
