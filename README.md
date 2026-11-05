@@ -6,7 +6,7 @@ Se efectuó una evaluación funcional del módulo de pulsioximetría del monitor
 
 ## 2. Introducción
 
-La pulsioximetría estima la saturación periférica de oxígeno (SpO₂) mediante el análisis de la absorción de luz roja e infrarroja por la hemoglobina. La componente pulsátil permite estimar la frecuencia de pulso (PR) y representar una onda fotopletismográfica (PPG). Un simulador de pulsioximetría permite reproducir condiciones controladas sin conectar el sensor a un paciente. La lectura obtenida depende del simulador, la compatibilidad con el sensor, la configuración del monitor, la calidad de la señal y el procesamiento interno. En esta práctica se evaluó la respuesta del uMEC 100 frente a cambios de saturación y frecuencia de pulso, así como la activación de alarmas configuradas.
+La pulsioximetría estima la saturación periférica de oxígeno (SpO₂) mediante el análisis de la absorción de luz roja e infrarroja por la hemoglobina. La componente pulsátil permite estimar la frecuencia de pulso (PR) y representar una onda fotopletismográfica (PPG). Un simulador de pulsioximetría permite reproducir condiciones controladas sin conectar el sensor a un paciente. La lectura obtenida depende del simulador, la compatibilidad con el sensor, la configuración del monitor, la calidad de la señal y el procesamiento interno. En esta práctica se evaluó la respuesta del uMEC 100 frente a cambios de saturación y frecuencia de pulso, así como la activación de alarmas configuradas [1, 2].
 
 ## 3. Objetivos
 
@@ -31,11 +31,11 @@ La pulsioximetría estima la saturación periférica de oxígeno (SpO₂) median
 
 ### 5.1. Monitor Mindray uMEC 100
 
-Monitor multiparamétrico que permite visualizar parámetros fisiológicos y configurar límites de alarma. En esta práctica se utilizó únicamente la medición de **SpO₂** y **frecuencia de pulso derivada del sensor óptico**. La PR obtenida de pulsioximetría no debe confundirse con la HR medida mediante ECG, aunque puedan coincidir numéricamente.
+Monitor multiparamétrico que permite visualizar parámetros fisiológicos y configurar límites de alarma. En esta práctica se utilizó únicamente la medición de **SpO₂** y **frecuencia de pulso derivada del sensor óptico**. La PR obtenida de pulsioximetría no debe confundirse con la HR medida mediante ECG, aunque puedan coincidir numéricamente [3].
 
 ### 5.2. Simulador Pronk OxSim OX-1
 
-Simulador destinado a comprobar el funcionamiento de sistemas de pulsioximetría mediante condiciones ópticas/pulsátiles reproducibles. Las variables abordadas en esta práctica fueron:
+Simulador destinado a comprobar el funcionamiento de sistemas de pulsioximetría mediante condiciones ópticas/pulsátiles reproducibles [4]. Las variables abordadas en esta práctica fueron:
 
 <table align="center">
   <thead>
@@ -77,7 +77,7 @@ Simulador destinado a comprobar el funcionamiento de sistemas de pulsioximetría
 
 ### 5.4. Tolerancias o errores máximos permitidos (EMP)
 
-Los errores observados en esta práctica no equivalen automáticamente a un resultado de conformidad. La especificación aplicable debe verificarse para el **monitor, el módulo y el sensor exactos**. La precisión de SpO₂ suele expresarse mediante **Arms**, medida estadística que no equivale a un error máximo permitido por lectura individual. La precisión de PR y el comportamiento en baja perfusión también dependen de las especificaciones del fabricante. Como marco normativo general puede consultarse ISO 80601-2-61.
+Los errores observados en esta práctica no equivalen automáticamente a un resultado de conformidad. La especificación aplicable debe verificarse para el **monitor, el módulo y el sensor exactos**. La precisión de SpO₂ suele expresarse mediante **Arms**, medida estadística que no equivale a un error máximo permitido por lectura individual. La precisión de PR y el comportamiento en baja perfusión también dependen de las especificaciones del fabricante. Como marco normativo general puede consultarse ISO 80601-2-61 [2]; las especificaciones del conjunto monitor-sensor deben contrastarse con la documentación del fabricante [3].
 
 <table align="center">
   <thead>
@@ -402,24 +402,17 @@ La frecuencia de pulso es inversamente proporcional al intervalo temporal entre 
 
 ### 8.1. ¿Cuál es el principio de operación del Pronk OxSim OX-1 para simular una onda pulsátil?
 
-El simulador reproduce condiciones ópticas/pulsátiles que el sensor de pulsioximetría interpreta como cambios periódicos asociados al pulso arterial. Al establecer una consigna de frecuencia y saturación, el monitor procesa la señal para estimar PR y SpO₂ y representar la onda PPG. El mecanismo interno específico de modulación del OX-1 debe confirmarse con su manual técnico antes de describir componentes o algoritmos internos concretos.
+El principio físico se basa en reproducir ante el sensor las variaciones periódicas de la señal óptica que normalmente produciría la sangre arterial pulsátil. Un pulsioxímetro emite luz roja e infrarroja y detecta la luz recibida; la proporción entre las componentes pulsátiles y no pulsátiles de ambas longitudes de onda permite estimar la SpO₂, mientras que la periodicidad de la señal permite calcular la frecuencia de pulso. El OxSim OX-1 simula una respuesta óptica compatible con valores programados de saturación y pulso, de manera que el sensor detecta cambios equivalentes a los de un tejido perfundido y el monitor presenta lecturas de SpO₂, PR y una onda PPG sin necesidad de un paciente [2, 4]. Esta explicación describe el principio de simulación; el mecanismo óptico interno exacto del OX-1 requiere confirmación en su manual técnico.
 
 ### 8.2. ¿Por qué una SpO₂ baja puede ser un falso positivo en una situación de mala perfusión?
 
-La perfusión periférica reducida disminuye la amplitud de la componente pulsátil de la señal, lo que puede reducir su relación señal-ruido. El movimiento, la luz ambiente o un acoplamiento inadecuado del sensor pueden producir lecturas inestables o falsamente bajas y activar una alarma sin una desaturación real. Sin embargo, una lectura baja también puede ser verdadera y no debe descartarse automáticamente: deben evaluarse la calidad de la señal, el sensor y el contexto clínico.
+La perfusión periférica reducida disminuye la amplitud de la componente pulsátil de la señal, lo que puede reducir su relación señal-ruido [2]. El movimiento, la luz ambiente o un acoplamiento inadecuado del sensor pueden producir lecturas inestables o falsamente bajas y activar una alarma sin una desaturación real. Sin embargo, una lectura baja también puede ser verdadera y no debe descartarse automáticamente: deben evaluarse la calidad de la señal, el sensor y el contexto clínico.
 
 
 ## Conclusiones
 
-La evaluación funcional del monitor de signos vitales Mindray uMEC 100 mediante el simulador Pronk OxSim OX-1 permitió analizar su comportamiento frente a variaciones de frecuencia de pulso y saturación periférica de oxígeno (SpO₂), reproduciendo condiciones de bradicardia, hipoxia, baja perfusión y taquicardia. Las pruebas permitieron establecer la correspondencia entre los valores simulados y las mediciones registradas, así como examinar la respuesta del sistema de alarmas ante condiciones fuera de los límites configurados.
+La evaluación funcional del Mindray uMEC 100 con el simulador Pronk OxSim OX-1 mostró coincidencia en las frecuencias de pulso registradas (error absoluto de 0 bpm) y diferencias de SpO₂ de hasta 1 punto porcentual (error relativo máximo de 1,02 %). Las alarmas presentaron tiempos de activación registrados entre 8 y 12 segundos. La práctica permitió relacionar la frecuencia de pulso con la onda PPG e identificar posibles efectos de la perfusión sobre la calidad de la señal. Estos resultados describen únicamente las condiciones ensayadas y no constituyen una certificación de precisión clínica o conformidad metrológica; para ampliar la evaluación se requieren repeticiones y registros comparables de la señal.
 
-Los resultados evidenciaron una concordancia entre las frecuencias de pulso simuladas y las registradas por el monitor, con errores absolutos de 0 bpm en los cuatro escenarios. En las mediciones de SpO₂ se obtuvieron errores absolutos entre 0 y 1 punto porcentual, con errores relativos máximos de 1,02 %. Estos resultados indican que, bajo las condiciones evaluadas, el monitor presentó una respuesta de medición cercana a los valores de referencia establecidos mediante el simulador.
-
-En cuanto al sistema de alarmas, se identificaron diferencias en los tiempos de activación según la condición simulada. La respuesta se produjo entre 8 y 12 segundos, lo que evidencia que la detección de valores fuera de los límites configurados no necesariamente genera una alerta inmediata. Este comportamiento debe considerarse durante la evaluación funcional de equipos de monitorización, especialmente cuando se requiere identificar oportunamente alteraciones fisiológicas.
-
-La práctica permitió relacionar los cambios de frecuencia de pulso con el comportamiento temporal de la señal fotopletismográfica y reconocer que las condiciones de baja perfusión pueden afectar la calidad de la señal y la confiabilidad de las mediciones. Sin embargo, para establecer cuantitativamente el grado de distorsión de la onda sería necesario realizar un análisis adicional de sus características morfológicas y amplitud.
-
-Como siguiente paso, se propone ampliar las pruebas mediante repeticiones de cada escenario, diferentes niveles de perfusión y variaciones progresivas de los límites de alarma. Esto permitiría evaluar la repetibilidad de las mediciones, caracterizar los tiempos de respuesta y obtener una valoración más completa del desempeño del monitor en condiciones simuladas.
 
 ## Referencias y fuentes
 
